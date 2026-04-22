@@ -71,17 +71,17 @@
 
 ## Phase 6: Graph Validation & Execution Sandbox
 
-- [ ] Checkout branch: `git checkout -b execution-sandbox`
-- [ ] Write `src/lib/graphValidation.ts`:
-  - [ ] Ensure graph contains exactly one `StartNode`.
-  - [ ] Ensure graph contains at least one `EndNode`.
-  - [ ] Check for disconnected/orphaned nodes (Degree of 0).
-  - [ ] Detect cycles using Depth-First Search (DFS) or Kahn's Algorithm.
-- [ ] Build `SandboxModal` UI (Shadcn `<Dialog>`).
-- [ ] Implement "Test Workflow" interaction:
-  - [ ] On click, run validation. If fails, trigger Shadcn `<Toast>` with specific error.
-  - [ ] If valid, trigger TanStack Query `useMutation` to POST graph data to `/api/simulate`.
-- [ ] Build `ExecutionTimeline` component to visually render the simulated steps returned by the API.
+- [x] Checkout branch: `git checkout -b execution-sandbox`
+- [x] Write `src/lib/graphValidation.ts`:
+  - [x] Ensure graph contains exactly one `StartNode`.
+  - [x] Ensure graph contains at least one `EndNode`.
+  - [x] Check for disconnected/orphaned nodes (Degree of 0).
+  - [x] Detect cycles using Depth-First Search (DFS) or Kahn's Algorithm.
+- [x] Build `SandboxModal` UI (Shadcn `<Dialog>`).
+- [x] Implement "Test Workflow" interaction:
+  - [x] On click, run validation. If fails, trigger Shadcn `<Toast>` with specific error.
+  - [x] If valid, trigger TanStack Query `useMutation` to POST graph data to `/api/simulate`.
+- [x] Build `ExecutionTimeline` component to visually render the simulated steps returned by the API.
 
 ## Phase 7: Polish, Export, & Documentation
 
