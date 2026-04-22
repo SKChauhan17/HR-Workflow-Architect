@@ -31,15 +31,15 @@
 
 ## Phase 3: Global State Architecture (Zustand + Immer)
 
-- [ ] Checkout branch: `git checkout -b state-management`
-- [ ] Create `src/store/useWorkflowStore.ts`.
-- [ ] Initialize state: `nodes: []`, `edges: []`, `selectedNodeId: string | null`.
-- [ ] Implement standard React Flow actions: `onNodesChange`, `onEdgesChange`, `onConnect`.
-- [ ] Implement custom actions using Immer:
-  - [ ] `addNode(node)`
-  - [ ] `updateNodeData(id, data)` (Mutates `draft.nodes[index].data` cleanly).
-  - [ ] `setSelectedNode(id)`
-  - [ ] `deleteSelectedElements()`
+- [x] Checkout branch: `git checkout -b state-management`
+- [x] Create `src/store/useWorkflowStore.ts`.
+- [x] Initialize state: `nodes: []`, `edges: []`, `selectedNodeId: string | null`.
+- [x] Implement standard React Flow actions: `onNodesChange`, `onEdgesChange`, `onConnect`.
+- [x] Implement custom actions using Immer:
+  - [x] `addNode(node)`
+  - [x] `updateNodeData(id, data)` (Mutates `draft.nodes[index].data` cleanly).
+  - [x] `setSelectedNode(id)`
+  - [x] `deleteSelectedElements()`
 
 ## Phase 4: Canvas Engine & Custom Nodes (`@xyflow/react`)
 
