@@ -18,11 +18,12 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useWorkflowStore } from '@/store/useWorkflowStore';
 import { validateGraph } from '@/lib/graphValidation';
 import { ExecutionTimeline } from './ExecutionTimeline';
-import type { SimulationResponse, SimulationStep } from '@/types/workflow';
+import type { Node, Edge } from '@xyflow/react';
+import type { NodeData, SimulationResponse, SimulationStep } from '@/types/workflow';
 
 async function postSimulation(payload: {
-  nodes: unknown[];
-  edges: unknown[];
+  nodes: Node<NodeData>[];
+  edges: Edge[];
 }): Promise<SimulationResponse> {
   const res = await fetch('/api/simulate', {
     method: 'POST',
@@ -77,9 +78,13 @@ export function SandboxModal() {
     const result = validateGraph(nodes, edges);
 
     if (!result.isValid) {
-      for (const error of result.errors) {
-        toast.error(error);
-      }
+      const [firstError, ...remainingErrors] = result.errors;
+      const validationMessage = firstError
+        ? remainingErrors.length > 0
+          ? `${firstError} (+${remainingErrors.length} more validation error${remainingErrors.length === 1 ? '' : 's'})`
+          : firstError
+        : 'Workflow validation failed';
+      toast.error(validationMessage);
       return;
     }
 

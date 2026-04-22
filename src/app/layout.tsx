@@ -3,14 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/providers/QueryProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
-
-import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "HR Workflow Designer",
