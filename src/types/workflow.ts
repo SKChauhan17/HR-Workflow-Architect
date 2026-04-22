@@ -9,6 +9,10 @@ export interface BaseNodeData {
   [key: string]: unknown;
 }
 
+export interface StartNodeData extends BaseNodeData {
+  type: 'start';
+}
+
 export interface TaskNodeData extends BaseNodeData {
   type: 'task';
   description?: string;
@@ -27,7 +31,18 @@ export interface AutomatedNodeData extends BaseNodeData {
   actionId?: string;
 }
 
-export type NodeData = TaskNodeData | ApprovalNodeData | AutomatedNodeData | BaseNodeData;
+export interface EndNodeData extends BaseNodeData {
+  type: 'end';
+  endMessage?: string;
+}
+
+export type NodeData =
+  | StartNodeData
+  | TaskNodeData
+  | ApprovalNodeData
+  | AutomatedNodeData
+  | EndNodeData
+  | BaseNodeData;
 
 export interface SimulationStep {
   stepId: string;
