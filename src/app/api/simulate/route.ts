@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Node } from '@xyflow/react';
-import { SimulationResponse, SimulationStep, NodeData } from '@/types/workflow';
+import type { Node } from '@xyflow/react';
+import type { SimulationResponse, SimulationStep, NodeData } from '@/types/workflow';
 
 export async function POST(req: NextRequest) {
   try {
