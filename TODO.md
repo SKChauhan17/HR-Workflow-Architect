@@ -58,16 +58,16 @@
 
 ## Phase 5: Dynamic Forms (React Hook Form + Zod)
 
-- [ ] Checkout branch: `git checkout -b node-forms`
-- [ ] Define Zod schemas in `src/lib/schemas.ts` for each node type's required metadata.
-- [ ] Build the `NodeConfigPanel` component using Shadcn `<Sheet>` or a fixed right-side panel.
-- [ ] Create individual form components inside `ConfigPanel`:
-  - [ ] `StartNodeForm` (Title, dynamic key-value inputs).
-  - [ ] `TaskNodeForm` (Title, Description textarea, Assignee input, Date picker).
-  - [ ] `ApprovalNodeForm` (Title, Role `<Select>`, Threshold numeric input).
-  - [ ] `AutomatedNodeForm` (Use TanStack Query `useQuery` to fetch `/api/automations` and populate a `<Select>`).
-  - [ ] `EndNodeForm` (Message textarea, Summary toggle `<Switch>`).
-- [ ] Wire forms to sync with Zustand: Use `useEffect` or `onChange` handlers to call `updateNodeData` so the canvas updates in real-time as the user types.
+- [x] Checkout branch: `git checkout -b node-forms`
+- [x] Define Zod schemas in `src/lib/schemas.ts` for each node type's required metadata.
+- [x] Build the `NodeConfigPanel` component using Shadcn `<Sheet>` or a fixed right-side panel.
+- [x] Create individual form components inside `ConfigPanel`:
+  - [x] `StartNodeForm` (Title, dynamic key-value inputs).
+  - [x] `TaskNodeForm` (Title, Description textarea, Assignee input, Date picker).
+  - [x] `ApprovalNodeForm` (Title, Role `<Select>`, Threshold numeric input).
+  - [x] `AutomatedNodeForm` (Use TanStack Query `useQuery` to fetch `/api/automations` and populate a `<Select>`).
+  - [x] `EndNodeForm` (Message textarea, Summary toggle `<Switch>`).
+- [x] Wire forms to sync with Zustand: Use `useEffect` or `onChange` handlers to call `updateNodeData` so the canvas updates in real-time as the user types.
 
 ## Phase 6: Graph Validation & Execution Sandbox
 

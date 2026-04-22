@@ -29,6 +29,7 @@ interface WorkflowState {
   updateNodeData: (id: string, data: Partial<NodeData>) => void;
   setSelectedNode: (id: string | null) => void;
   deleteSelectedElements: () => void;
+  deleteNode: (id: string) => void;
 }
 
 export const useWorkflowStore = create<WorkflowState>()(
@@ -83,6 +84,16 @@ export const useWorkflowStore = create<WorkflowState>()(
       set((state) => {
         state.nodes = state.nodes.filter((node) => !node.selected);
         state.edges = state.edges.filter((edge) => !edge.selected);
+      });
+    },
+
+    deleteNode: (id) => {
+      set((state) => {
+        state.nodes = state.nodes.filter((n) => n.id !== id);
+        state.edges = state.edges.filter((e) => e.source !== id && e.target !== id);
+        if (state.selectedNodeId === id) {
+          state.selectedNodeId = null;
+        }
       });
     },
   }))
