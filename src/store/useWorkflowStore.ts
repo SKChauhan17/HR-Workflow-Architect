@@ -20,7 +20,7 @@ interface WorkflowState {
   selectedNodeId: string | null;
 
   /* ── React Flow Handlers ────────────────────────────── */
-  onNodesChange: (changes: NodeChange[]) => void;
+  onNodesChange: (changes: NodeChange<Node<NodeData>>[]) => void;
   onEdgesChange: (changes: EdgeChange[]) => void;
   onConnect: (connection: Connection) => void;
 

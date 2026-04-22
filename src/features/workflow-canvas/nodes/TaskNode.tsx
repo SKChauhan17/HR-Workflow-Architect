@@ -1,14 +1,14 @@
 'use client';
 
 import { memo } from 'react';
-import { Handle, Position, type NodeProps } from '@xyflow/react';
+import { Handle, Position, type NodeProps, type Node } from '@xyflow/react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ClipboardList, User, CalendarDays } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { TaskNodeData } from '@/types/workflow';
 
-function TaskNodeComponent({ data, selected }: NodeProps<TaskNodeData>) {
+function TaskNodeComponent({ data, selected }: NodeProps<Node<TaskNodeData>>) {
   return (
     <Card
       className={cn(

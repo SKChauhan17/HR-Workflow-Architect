@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, type ElementType } from 'react';
-import { Handle, Position, type NodeProps } from '@xyflow/react';
+import { Handle, Position, type NodeProps, type Node } from '@xyflow/react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Zap, Mail, MessageSquare, Shield, FileText } from 'lucide-react';
@@ -16,7 +16,7 @@ const ACTION_ICONS: Record<string, ElementType> = {
   generate_offer_letter: FileText,
 };
 
-function AutomatedNodeComponent({ data, selected }: NodeProps<AutomatedNodeData>) {
+function AutomatedNodeComponent({ data, selected }: NodeProps<Node<AutomatedNodeData>>) {
   const ActionIcon = (data.actionId && ACTION_ICONS[data.actionId]) || Zap;
 
   return (

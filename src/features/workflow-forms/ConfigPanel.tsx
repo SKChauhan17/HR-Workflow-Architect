@@ -10,6 +10,13 @@ import { TaskNodeForm } from './components/TaskNodeForm';
 import { ApprovalNodeForm } from './components/ApprovalNodeForm';
 import { AutomatedNodeForm } from './components/AutomatedNodeForm';
 import { EndNodeForm } from './components/EndNodeForm';
+import type {
+  StartNodeData,
+  TaskNodeData,
+  ApprovalNodeData,
+  AutomatedNodeData,
+  EndNodeData,
+} from '@/types/workflow';
 
 export function ConfigPanel() {
   const selectedNodeId = useWorkflowStore((s) => s.selectedNodeId);
@@ -50,24 +57,26 @@ export function ConfigPanel() {
   }
 
   // Render the appropriate form based on node type
+  // React Flow's node.type is string | undefined, so we cast data explicitly
+  // in each branch where the type match guarantees the correct shape.
   let FormComponent = null;
   const nodeType = selectedNode.type;
 
   switch (nodeType) {
     case 'start':
-      FormComponent = <StartNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
+      FormComponent = <StartNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data as StartNodeData} />;
       break;
     case 'task':
-      FormComponent = <TaskNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
+      FormComponent = <TaskNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data as TaskNodeData} />;
       break;
     case 'approval':
-      FormComponent = <ApprovalNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
+      FormComponent = <ApprovalNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data as ApprovalNodeData} />;
       break;
     case 'automated':
-      FormComponent = <AutomatedNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
+      FormComponent = <AutomatedNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data as AutomatedNodeData} />;
       break;
     case 'end':
-      FormComponent = <EndNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
+      FormComponent = <EndNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data as EndNodeData} />;
       break;
     default:
       FormComponent = <p className="text-sm text-muted-foreground">Unknown node type: {nodeType}</p>;

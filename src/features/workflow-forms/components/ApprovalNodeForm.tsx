@@ -15,7 +15,7 @@ type ApprovalNodeFormValues = z.infer<typeof approvalNodeSchema>;
 
 interface ApprovalNodeFormProps {
   nodeId: string;
-  defaultValues?: Partial<ApprovalNodeFormValues>;
+  defaultValues?: Partial<ApprovalNodeData>;
 }
 
 export function ApprovalNodeForm({ nodeId, defaultValues }: ApprovalNodeFormProps) {
