@@ -20,12 +20,11 @@ interface ApprovalNodeFormProps {
 export function ApprovalNodeForm({ nodeId, defaultValues }: ApprovalNodeFormProps) {
   const updateNodeData = useWorkflowStore((s) => s.updateNodeData);
 
-  const { register, control, watch, formState: { errors } } = useForm<ApprovalNodeFormValues>({
+  const { register, control, watch, formState: { errors } } = useForm<z.input<typeof approvalNodeSchema>, unknown, ApprovalNodeFormValues>({
     resolver: zodResolver(approvalNodeSchema),
     defaultValues: {
       title: defaultValues?.title || 'Approval Gate',
-      // @ts-expect-error fallback role
-      role: defaultValues?.role || '',
+      role: (defaultValues?.role as ApprovalNodeFormValues['role']) || undefined,
       threshold: defaultValues?.threshold || 1,
     },
     mode: 'onChange',
@@ -34,8 +33,8 @@ export function ApprovalNodeForm({ nodeId, defaultValues }: ApprovalNodeFormProp
   useEffect(() => {
     // eslint-disable-next-line react-hooks/incompatible-library
     const subscription = watch((value) => {
-      // @ts-expect-error Form values match NodeData loosely
-      updateNodeData(nodeId, value);
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      updateNodeData(nodeId, value as any);
     });
     return () => subscription.unsubscribe();
   }, [watch, nodeId, updateNodeData]);

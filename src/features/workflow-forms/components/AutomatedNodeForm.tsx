@@ -36,6 +36,7 @@ export function AutomatedNodeForm({ nodeId, defaultValues }: AutomatedNodeFormPr
     queryKey: ['automations'],
     queryFn: async () => {
       const res = await fetch('/api/automations');
+      if (!res.ok) throw new Error('Failed to fetch automations');
       return res.json();
     },
   });
@@ -45,8 +46,8 @@ export function AutomatedNodeForm({ nodeId, defaultValues }: AutomatedNodeFormPr
   useEffect(() => {
     // eslint-disable-next-line react-hooks/incompatible-library
     const subscription = watch((value) => {
-      // @ts-expect-error Form values match NodeData loosely
-      updateNodeData(nodeId, value);
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      updateNodeData(nodeId, value as any);
     });
     return () => subscription.unsubscribe();
   }, [watch, nodeId, updateNodeData]);
@@ -82,7 +83,7 @@ export function AutomatedNodeForm({ nodeId, defaultValues }: AutomatedNodeFormPr
         {errors.actionId && <p className="text-[11px] text-destructive">{errors.actionId.message}</p>}
       </div>
 
-      {selectedActionId && actions.find(a => a.id === selectedActionId)?.params.map((param) => (
+      {selectedActionId && actions.find(a => a.id === selectedActionId)?.params?.map((param) => (
         <div key={param} className="space-y-2 relative pl-2 border-l-2 border-slate-200">
           <Label className="text-xs text-muted-foreground capitalize">{param}</Label>
           <Input 
