@@ -46,7 +46,7 @@ export function AutomatedNodeForm({ nodeId, defaultValues }: AutomatedNodeFormPr
   useEffect(() => {
     // eslint-disable-next-line react-hooks/incompatible-library
     const subscription = watch((value) => {
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       updateNodeData(nodeId, value as any);
     });
     return () => subscription.unsubscribe();

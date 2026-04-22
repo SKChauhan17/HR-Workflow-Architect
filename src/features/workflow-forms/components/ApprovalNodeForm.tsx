@@ -33,7 +33,7 @@ export function ApprovalNodeForm({ nodeId, defaultValues }: ApprovalNodeFormProp
   useEffect(() => {
     // eslint-disable-next-line react-hooks/incompatible-library
     const subscription = watch((value) => {
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       updateNodeData(nodeId, value as any);
     });
     return () => subscription.unsubscribe();
@@ -69,7 +69,7 @@ export function ApprovalNodeForm({ nodeId, defaultValues }: ApprovalNodeFormProp
 
       <div className="space-y-2">
         <Label htmlFor="threshold">Required Approvals</Label>
-        <Input id="threshold" type="number" min={1} {...register('threshold')} />
+        <Input id="threshold" type="number" min={1} {...register('threshold', { valueAsNumber: true })} />
       </div>
     </div>
   );
