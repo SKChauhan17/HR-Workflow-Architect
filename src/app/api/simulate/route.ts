@@ -3,7 +3,9 @@ import { SimulationResponse, SimulationStep } from '@/types/workflow';
 
 export async function POST(req: NextRequest) {
   try {
-    const graphData = await req.json();
+    const graphData = (await req.json()) as {
+      nodes?: Array<{ id?: string; data?: { title?: string } }>;
+    };
     
     // Simulate a network/processing delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
@@ -11,7 +13,7 @@ export async function POST(req: NextRequest) {
     const nodes = graphData.nodes || [];
     
     // Generate mock execution steps from the nodes
-    const steps: SimulationStep[] = nodes.map((node: any, index: number) => ({
+    const steps: SimulationStep[] = nodes.map((node, index: number) => ({
       stepId: node.id || `step-${index}`,
       status: 'success',
       message: `Successfully processed node: ${node.data?.title || node.id || 'Unknown'}`,
@@ -33,7 +35,7 @@ export async function POST(req: NextRequest) {
     };
 
     return NextResponse.json(response);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, steps: [], error: 'Invalid request payload' },
       { status: 400 }
