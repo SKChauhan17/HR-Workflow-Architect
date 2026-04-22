@@ -43,18 +43,18 @@
 
 ## Phase 4: Canvas Engine & Custom Nodes (`@xyflow/react`)
 
-- [ ] Checkout branch: `git checkout -b canvas-engine`
-- [ ] Build the `Workspace` page in `src/app/page.tsx`.
-- [ ] Create `WorkflowCanvas` component (The `<ReactFlow>` wrapper).
-- [ ] Implement Custom Node UI Components (using Shadcn Cards/Badges):
-  - [ ] `StartNode.tsx` (Green accents, Right Target Handle).
-  - [ ] `TaskNode.tsx` (Blue accents, Left/Right Handles, Assignee/Date display).
-  - [ ] `ApprovalNode.tsx` (Orange accents, Left/Right Handles, Role display).
-  - [ ] `AutomatedNode.tsx` (Purple accents, Left/Right Handles, Lucide Icon).
-  - [ ] `EndNode.tsx` (Red/Gray accents, Left Source Handle).
-- [ ] Register all custom nodes in the `nodeTypes` object outside the component render cycle.
-- [ ] Build the `DraggableSidebar` component mapping out node templates.
-- [ ] Implement HTML5 Drag and Drop (`onDragStart`, `onDragOver`, `onDrop`) to spawn nodes at cursor coordinates.
+- [x] Checkout branch: `git checkout -b canvas-engine`
+- [x] Build the `Workspace` page in `src/app/page.tsx`.
+- [x] Create `WorkflowCanvas` component (The `<ReactFlow>` wrapper).
+- [x] Implement Custom Node UI Components (using Shadcn Cards/Badges):
+  - [x] `StartNode.tsx` (Green accents, Right Target Handle).
+  - [x] `TaskNode.tsx` (Blue accents, Left/Right Handles, Assignee/Date display).
+  - [x] `ApprovalNode.tsx` (Orange accents, Left/Right Handles, Role display).
+  - [x] `AutomatedNode.tsx` (Purple accents, Left/Right Handles, Lucide Icon).
+  - [x] `EndNode.tsx` (Red/Gray accents, Left Source Handle).
+- [x] Register all custom nodes in the `nodeTypes` object outside the component render cycle.
+- [x] Build the `DraggableSidebar` component mapping out node templates.
+- [x] Implement HTML5 Drag and Drop (`onDragStart`, `onDragOver`, `onDrop`) to spawn nodes at cursor coordinates.
 
 ## Phase 5: Dynamic Forms (React Hook Form + Zod)
 
