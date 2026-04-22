@@ -2,19 +2,19 @@
 
 ## Phase 1: Next.js, Shadcn, & Architecture Initialization (Strictly pnpm)
 
-- [ ] Initialize Next.js: `pnpm create next-app@latest hr-workflow-designer --typescript --tailwind --eslint --app --src-dir`
-- [ ] Initialize Shadcn UI: `pnpm dlx shadcn@latest init` (Choose "New York" style, CSS variables: yes).
-- [ ] Install Shadcn components: `pnpm dlx shadcn@latest add button sheet card input label select textarea scroll-area badge toast separator`
-- [ ] Install core dependencies: `pnpm add @xyflow/react zustand immer @tanstack/react-query react-hook-form @hookform/resolvers zod lucide-react clsx tailwind-merge`
-- [ ] Scaffold the feature-sliced folder structure:
-  - [ ] `src/app/api/` (Route handlers)
-  - [ ] `src/components/ui/` (Shadcn)
-  - [ ] `src/features/workflow-canvas/`
-  - [ ] `src/features/workflow-forms/`
-  - [ ] `src/features/workflow-sandbox/`
-  - [ ] `src/lib/` (Zod schemas, tailwind utils)
-  - [ ] `src/store/` (Zustand)
-  - [ ] `src/types/` (TypeScript definitions)
+- [x] Initialize Next.js: `pnpm create next-app@latest hr-workflow-designer --typescript --tailwind --eslint --app --src-dir`
+- [x] Initialize Shadcn UI: `pnpm dlx shadcn@latest init` (Choose "New York" style, CSS variables: yes).
+- [x] Install Shadcn components: `pnpm dlx shadcn@latest add button sheet card input label select textarea scroll-area badge toast separator`
+- [x] Install core dependencies: `pnpm add @xyflow/react zustand immer @tanstack/react-query react-hook-form @hookform/resolvers zod lucide-react clsx tailwind-merge`
+- [x] Scaffold the feature-sliced folder structure:
+  - [x] `src/app/api/` (Route handlers)
+  - [x] `src/components/ui/` (Shadcn)
+  - [x] `src/features/workflow-canvas/`
+  - [x] `src/features/workflow-forms/`
+  - [x] `src/features/workflow-sandbox/`
+  - [x] `src/lib/` (Zod schemas, tailwind utils)
+  - [x] `src/store/` (Zustand)
+  - [x] `src/types/` (TypeScript definitions)
 
 ## Phase 2: Next.js Route Handlers & TanStack Query (Mock Backend)
 
