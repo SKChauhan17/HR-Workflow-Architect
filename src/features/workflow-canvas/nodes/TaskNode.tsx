@@ -8,9 +8,7 @@ import { ClipboardList, User, CalendarDays } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { TaskNodeData } from '@/types/workflow';
 
-function TaskNodeComponent({ data, selected }: NodeProps) {
-  const nodeData = data as unknown as TaskNodeData;
-
+function TaskNodeComponent({ data, selected }: NodeProps<TaskNodeData>) {
   return (
     <Card
       className={cn(
@@ -32,7 +30,7 @@ function TaskNodeComponent({ data, selected }: NodeProps) {
         </div>
         <div className="flex flex-col gap-0.5 min-w-0 flex-1">
           <CardTitle className="text-sm font-medium text-[#181d26] truncate">
-            {nodeData.title || 'Task'}
+            {data.title || 'Task'}
           </CardTitle>
           <Badge className="bg-blue-100 text-blue-700 border-blue-200/60 hover:bg-blue-100 w-fit shrink-0">
             Task
@@ -41,16 +39,16 @@ function TaskNodeComponent({ data, selected }: NodeProps) {
       </CardHeader>
 
       <CardContent className="flex flex-col gap-1.5 pt-1">
-        {nodeData.assignee && (
+        {data.assignee && (
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground w-full">
             <User className="h-3 w-3 shrink-0" />
-            <span className="truncate min-w-0">{nodeData.assignee}</span>
+            <span className="truncate min-w-0">{data.assignee}</span>
           </div>
         )}
-        {nodeData.dueDate && (
+        {data.dueDate && (
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground w-full">
             <CalendarDays className="h-3 w-3 shrink-0" />
-            <span className="truncate min-w-0">{nodeData.dueDate}</span>
+            <span className="truncate min-w-0">{data.dueDate}</span>
           </div>
         )}
       </CardContent>

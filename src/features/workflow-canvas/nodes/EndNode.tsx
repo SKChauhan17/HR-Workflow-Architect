@@ -8,9 +8,7 @@ import { CircleStop } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { EndNodeData } from '@/types/workflow';
 
-function EndNodeComponent({ data, selected }: NodeProps) {
-  const nodeData = data as unknown as EndNodeData;
-
+function EndNodeComponent({ data, selected }: NodeProps<EndNodeData>) {
   return (
     <Card
       className={cn(
@@ -31,7 +29,7 @@ function EndNodeComponent({ data, selected }: NodeProps) {
           <CircleStop className="h-3.5 w-3.5 text-slate-600" />
         </div>
         <CardTitle className="text-sm font-medium text-[#181d26] truncate min-w-0 flex-1">
-          {nodeData.title || 'End'}
+          {data.title || 'End'}
         </CardTitle>
       </CardHeader>
 
@@ -39,9 +37,9 @@ function EndNodeComponent({ data, selected }: NodeProps) {
         <Badge className="bg-slate-100 text-slate-600 border-slate-200/60 hover:bg-slate-100 w-fit shrink-0">
           End
         </Badge>
-        {nodeData.endMessage && (
+        {data.endMessage && (
           <p className="text-xs text-muted-foreground leading-snug truncate min-w-0 w-full">
-            {nodeData.endMessage}
+            {data.endMessage}
           </p>
         )}
       </CardContent>

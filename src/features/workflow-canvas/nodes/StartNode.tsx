@@ -8,9 +8,7 @@ import { Play } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { StartNodeData } from '@/types/workflow';
 
-function StartNodeComponent({ data, selected }: NodeProps) {
-  const nodeData = data as unknown as StartNodeData;
-
+function StartNodeComponent({ data, selected }: NodeProps<StartNodeData>) {
   return (
     <Card
       className={cn(
@@ -24,7 +22,7 @@ function StartNodeComponent({ data, selected }: NodeProps) {
           <Play className="h-3.5 w-3.5 text-emerald-600" />
         </div>
         <CardTitle className="text-sm font-medium text-[#181d26] truncate min-w-0 flex-1">
-          {nodeData.title || 'Start'}
+          {data.title || 'Start'}
         </CardTitle>
       </CardHeader>
 

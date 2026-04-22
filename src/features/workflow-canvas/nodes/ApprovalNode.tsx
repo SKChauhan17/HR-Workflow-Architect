@@ -8,9 +8,7 @@ import { ShieldCheck, UserCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { ApprovalNodeData } from '@/types/workflow';
 
-function ApprovalNodeComponent({ data, selected }: NodeProps) {
-  const nodeData = data as unknown as ApprovalNodeData;
-
+function ApprovalNodeComponent({ data, selected }: NodeProps<ApprovalNodeData>) {
   return (
     <Card
       className={cn(
@@ -32,7 +30,7 @@ function ApprovalNodeComponent({ data, selected }: NodeProps) {
         </div>
         <div className="flex flex-col gap-0.5 min-w-0 flex-1">
           <CardTitle className="text-sm font-medium text-[#181d26] truncate">
-            {nodeData.title || 'Approval'}
+            {data.title || 'Approval'}
           </CardTitle>
           <Badge className="bg-amber-100 text-amber-700 border-amber-200/60 hover:bg-amber-100 w-fit shrink-0">
             Approval
@@ -41,10 +39,10 @@ function ApprovalNodeComponent({ data, selected }: NodeProps) {
       </CardHeader>
 
       <CardContent className="flex flex-col gap-1.5 pt-1">
-        {nodeData.role && (
+        {data.role && (
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground w-full">
             <UserCheck className="h-3 w-3 shrink-0" />
-            <span className="truncate min-w-0">{nodeData.role}</span>
+            <span className="truncate min-w-0">{data.role}</span>
           </div>
         )}
       </CardContent>

@@ -45,8 +45,7 @@ export type NodeData =
   | TaskNodeData
   | ApprovalNodeData
   | AutomatedNodeData
-  | EndNodeData
-  | BaseNodeData;
+  | EndNodeData;
 
 export interface SimulationStep {
   stepId: string;
@@ -58,4 +57,5 @@ export interface SimulationStep {
 export interface SimulationResponse {
   success: boolean;
   steps: SimulationStep[];
+  error?: string;
 }
