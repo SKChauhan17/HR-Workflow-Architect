@@ -55,19 +55,19 @@ export function ConfigPanel() {
 
   switch (nodeType) {
     case 'start':
-      FormComponent = <StartNodeForm nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
+      FormComponent = <StartNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
       break;
     case 'task':
-      FormComponent = <TaskNodeForm nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
+      FormComponent = <TaskNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
       break;
     case 'approval':
-      FormComponent = <ApprovalNodeForm nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
+      FormComponent = <ApprovalNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
       break;
     case 'automated':
-      FormComponent = <AutomatedNodeForm nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
+      FormComponent = <AutomatedNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
       break;
     case 'end':
-      FormComponent = <EndNodeForm nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
+      FormComponent = <EndNodeForm key={selectedNode.id} nodeId={selectedNode.id} defaultValues={selectedNode.data} />;
       break;
     default:
       FormComponent = <p className="text-sm text-muted-foreground">Unknown node type: {nodeType}</p>;
