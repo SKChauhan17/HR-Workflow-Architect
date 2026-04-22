@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import type { StartNodeData } from '@/types/workflow';
 
 type StartNodeFormValues = z.infer<typeof startNodeSchema>;
 
@@ -39,8 +40,7 @@ export function StartNodeForm({ nodeId, defaultValues }: StartNodeFormProps) {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/incompatible-library
     const subscription = watch((value) => {
-      // @ts-expect-error Form values match NodeData structure loosely
-      updateNodeData(nodeId, value);
+      updateNodeData(nodeId, value as Partial<StartNodeData>);
     });
     return () => subscription.unsubscribe();
   }, [watch, nodeId, updateNodeData]);

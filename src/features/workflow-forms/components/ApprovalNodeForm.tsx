@@ -9,6 +9,7 @@ import { useWorkflowStore } from '@/store/useWorkflowStore';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import type { ApprovalNodeData } from '@/types/workflow';
 
 type ApprovalNodeFormValues = z.infer<typeof approvalNodeSchema>;
 
@@ -33,8 +34,7 @@ export function ApprovalNodeForm({ nodeId, defaultValues }: ApprovalNodeFormProp
   useEffect(() => {
     // eslint-disable-next-line react-hooks/incompatible-library
     const subscription = watch((value) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      updateNodeData(nodeId, value as any);
+      updateNodeData(nodeId, value as Partial<ApprovalNodeData>);
     });
     return () => subscription.unsubscribe();
   }, [watch, nodeId, updateNodeData]);

@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import type { TaskNodeData } from '@/types/workflow';
 
 type TaskNodeFormValues = z.infer<typeof taskNodeSchema>;
 
@@ -43,8 +44,7 @@ export function TaskNodeForm({ nodeId, defaultValues }: TaskNodeFormProps) {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/incompatible-library
     const subscription = watch((value) => {
-      // @ts-expect-error Form values match NodeData structure loosely
-      updateNodeData(nodeId, value);
+      updateNodeData(nodeId, value as Partial<TaskNodeData>);
     });
     return () => subscription.unsubscribe();
   }, [watch, nodeId, updateNodeData]);

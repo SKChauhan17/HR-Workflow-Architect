@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
+import type { EndNodeData } from '@/types/workflow';
 
 type EndNodeFormValues = z.infer<typeof endNodeSchema>;
 
@@ -34,8 +35,7 @@ export function EndNodeForm({ nodeId, defaultValues }: EndNodeFormProps) {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/incompatible-library
     const subscription = watch((value) => {
-      // @ts-expect-error Form values match NodeData loosely
-      updateNodeData(nodeId, value);
+      updateNodeData(nodeId, value as Partial<EndNodeData>);
     });
     return () => subscription.unsubscribe();
   }, [watch, nodeId, updateNodeData]);
