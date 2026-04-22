@@ -95,7 +95,7 @@ export function validateGraph(
 /*  WHITE = unvisited, GRAY = in current path, BLACK = fully explored */
 /* ------------------------------------------------------------------ */
 
-const enum Color {
+enum Color {
   WHITE = 0,
   GRAY = 1,
   BLACK = 2,

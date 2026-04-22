@@ -20,7 +20,7 @@ interface WorkflowState {
   selectedNodeId: string | null;
 
   /* ── React Flow Handlers ────────────────────────────── */
-  onNodesChange: (changes: NodeChange[]) => void;
+  onNodesChange: (changes: NodeChange<Node<NodeData>>[]) => void;
   onEdgesChange: (changes: EdgeChange[]) => void;
   onConnect: (connection: Connection) => void;
 
@@ -42,7 +42,7 @@ export const useWorkflowStore = create<WorkflowState>()(
     /* ── React Flow Handlers ────────────────────────────── */
     onNodesChange: (changes) => {
       set((state) => {
-        state.nodes = applyNodeChanges(changes, state.nodes) as Node<NodeData>[];
+        state.nodes = applyNodeChanges<Node<NodeData>>(changes, state.nodes);
       });
     },
 

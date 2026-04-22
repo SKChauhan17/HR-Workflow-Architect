@@ -17,7 +17,7 @@ export default function Home() {
             HR Workflow Designer
           </span>
           <span className="rounded-full border border-border bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-400">
-            v0.6
+            v0.7
           </span>
         </div>
 
