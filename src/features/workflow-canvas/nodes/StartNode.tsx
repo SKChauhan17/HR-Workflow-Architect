@@ -1,14 +1,14 @@
 'use client';
 
 import { memo } from 'react';
-import { Handle, Position, type NodeProps } from '@xyflow/react';
+import { Handle, Position, type NodeProps, type Node } from '@xyflow/react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Play } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { StartNodeData } from '@/types/workflow';
 
-function StartNodeComponent({ data, selected }: NodeProps<StartNodeData>) {
+function StartNodeComponent({ data, selected }: NodeProps<Node<StartNodeData>>) {
   return (
     <Card
       className={cn(

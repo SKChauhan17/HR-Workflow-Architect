@@ -42,7 +42,7 @@ export const useWorkflowStore = create<WorkflowState>()(
     /* ── React Flow Handlers ────────────────────────────── */
     onNodesChange: (changes) => {
       set((state) => {
-        state.nodes = applyNodeChanges<Node<NodeData>>(changes, state.nodes);
+        state.nodes = applyNodeChanges(changes, state.nodes) as Node<NodeData>[];
       });
     },
 

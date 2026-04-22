@@ -1,14 +1,14 @@
 'use client';
 
 import { memo } from 'react';
-import { Handle, Position, type NodeProps } from '@xyflow/react';
+import { Handle, Position, type NodeProps, type Node } from '@xyflow/react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { CircleStop } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { EndNodeData } from '@/types/workflow';
 
-function EndNodeComponent({ data, selected }: NodeProps<EndNodeData>) {
+function EndNodeComponent({ data, selected }: NodeProps<Node<EndNodeData>>) {
   return (
     <Card
       className={cn(
