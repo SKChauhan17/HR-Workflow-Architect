@@ -27,14 +27,14 @@ function TaskNodeComponent({ data, selected }: NodeProps) {
       />
 
       <CardHeader className="flex flex-row items-center gap-2 pb-0">
-        <div className="flex h-7 w-7 items-center justify-center rounded-md bg-blue-50">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-blue-50">
           <ClipboardList className="h-3.5 w-3.5 text-blue-600" />
         </div>
-        <div className="flex flex-col gap-0.5">
-          <CardTitle className="text-sm font-medium text-[#181d26]">
+        <div className="flex flex-col gap-0.5 min-w-0 flex-1">
+          <CardTitle className="text-sm font-medium text-[#181d26] truncate">
             {nodeData.title || 'Task'}
           </CardTitle>
-          <Badge className="bg-blue-100 text-blue-700 border-blue-200/60 hover:bg-blue-100 w-fit">
+          <Badge className="bg-blue-100 text-blue-700 border-blue-200/60 hover:bg-blue-100 w-fit shrink-0">
             Task
           </Badge>
         </div>
@@ -42,15 +42,15 @@ function TaskNodeComponent({ data, selected }: NodeProps) {
 
       <CardContent className="flex flex-col gap-1.5 pt-1">
         {nodeData.assignee && (
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <User className="h-3 w-3" />
-            <span>{nodeData.assignee}</span>
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground w-full">
+            <User className="h-3 w-3 shrink-0" />
+            <span className="truncate min-w-0">{nodeData.assignee}</span>
           </div>
         )}
         {nodeData.dueDate && (
-          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <CalendarDays className="h-3 w-3" />
-            <span>{nodeData.dueDate}</span>
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground w-full">
+            <CalendarDays className="h-3 w-3 shrink-0" />
+            <span className="truncate min-w-0">{nodeData.dueDate}</span>
           </div>
         )}
       </CardContent>

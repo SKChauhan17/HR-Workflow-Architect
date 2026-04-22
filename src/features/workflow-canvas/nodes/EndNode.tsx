@@ -27,20 +27,20 @@ function EndNodeComponent({ data, selected }: NodeProps) {
       />
 
       <CardHeader className="flex flex-row items-center gap-2 pb-0">
-        <div className="flex h-7 w-7 items-center justify-center rounded-md bg-slate-100">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-slate-100">
           <CircleStop className="h-3.5 w-3.5 text-slate-600" />
         </div>
-        <CardTitle className="text-sm font-medium text-[#181d26]">
+        <CardTitle className="text-sm font-medium text-[#181d26] truncate min-w-0 flex-1">
           {nodeData.title || 'End'}
         </CardTitle>
       </CardHeader>
 
       <CardContent className="flex flex-col gap-1.5 pt-1">
-        <Badge className="bg-slate-100 text-slate-600 border-slate-200/60 hover:bg-slate-100">
+        <Badge className="bg-slate-100 text-slate-600 border-slate-200/60 hover:bg-slate-100 w-fit shrink-0">
           End
         </Badge>
         {nodeData.endMessage && (
-          <p className="text-xs text-muted-foreground leading-snug">
+          <p className="text-xs text-muted-foreground leading-snug truncate min-w-0 w-full">
             {nodeData.endMessage}
           </p>
         )}

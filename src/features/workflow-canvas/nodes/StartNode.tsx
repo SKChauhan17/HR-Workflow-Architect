@@ -20,10 +20,10 @@ function StartNodeComponent({ data, selected }: NodeProps) {
       size="sm"
     >
       <CardHeader className="flex flex-row items-center gap-2 pb-0">
-        <div className="flex h-7 w-7 items-center justify-center rounded-md bg-emerald-50">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-emerald-50">
           <Play className="h-3.5 w-3.5 text-emerald-600" />
         </div>
-        <CardTitle className="text-sm font-medium text-[#181d26]">
+        <CardTitle className="text-sm font-medium text-[#181d26] truncate min-w-0 flex-1">
           {nodeData.title || 'Start'}
         </CardTitle>
       </CardHeader>

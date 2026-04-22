@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useRef, type DragEvent } from 'react';
+import { useCallback, useEffect, useRef, type DragEvent } from 'react';
 import {
   ReactFlow,
   Background,
@@ -62,6 +62,8 @@ function CanvasInner() {
   const onConnect = useWorkflowStore((s) => s.onConnect);
   const addNode = useWorkflowStore((s) => s.addNode);
   const setSelectedNode = useWorkflowStore((s) => s.setSelectedNode);
+  const selectedNodeId = useWorkflowStore((s) => s.selectedNodeId);
+  const deleteNode = useWorkflowStore((s) => s.deleteNode);
 
   /** Allow drop by preventing the default browser behavior. */
   const onDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
@@ -106,6 +108,36 @@ function CanvasInner() {
   const onPaneClick = useCallback(() => {
     setSelectedNode(null);
   }, [setSelectedNode]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) {
+        return;
+      }
+
+      if (event.key !== 'Delete' && event.key !== 'Backspace') {
+        return;
+      }
+
+      const target = event.target;
+      if (target instanceof Element) {
+        const editableTarget = target.closest('input, textarea, select, [contenteditable="true"]');
+        if (editableTarget) {
+          return;
+        }
+      }
+
+      if (!selectedNodeId) {
+        return;
+      }
+
+      event.preventDefault();
+      deleteNode(selectedNodeId);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [deleteNode, selectedNodeId]);
 
   return (
     <div ref={reactFlowWrapper} className="h-full w-full">
