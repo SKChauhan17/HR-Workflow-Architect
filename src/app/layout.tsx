@@ -10,6 +10,8 @@ const inter = Inter({
   display: "swap",
 });
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 export const metadata: Metadata = {
   title: "HR Workflow Designer",
   description:
@@ -22,12 +24,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full`}>
+    <html lang="en" className={`${inter.variable} h-full`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col font-sans antialiased">
-        <QueryProvider>
-          {children}
-          <Toaster position="bottom-right" richColors closeButton />
-        </QueryProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <QueryProvider>
+            {children}
+            <Toaster position="bottom-right" richColors closeButton />
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

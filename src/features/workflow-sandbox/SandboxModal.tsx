@@ -31,7 +31,17 @@ async function postSimulation(payload: {
   });
 
   if (!res.ok) {
-    throw new Error(`Simulation failed with status ${res.status}`);
+    const text = await res.text();
+    let errorMessage = `Simulation failed with status ${res.status}`;
+    try {
+      const errorData = JSON.parse(text);
+      if (errorData && errorData.error) {
+        errorMessage = errorData.error;
+      }
+    } catch {
+      if (text) errorMessage = text;
+    }
+    throw new Error(errorMessage);
   }
 
   return res.json() as Promise<SimulationResponse>;

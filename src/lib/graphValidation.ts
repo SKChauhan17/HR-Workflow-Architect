@@ -54,8 +54,18 @@ export function validateGraph(
     outgoingMap.set(node.id, 0);
   }
 
-  // Tally edges
+  // Tally edges & detect dangling edges
+  const nodeIds = new Set(nodes.map(n => n.id));
+  
   for (const edge of edges) {
+    if (!nodeIds.has(edge.source)) {
+      errors.push(`Edge references a non-existent source node: ${edge.source}`);
+      return { isValid: false, errors };
+    }
+    if (!nodeIds.has(edge.target)) {
+      errors.push(`Edge references a non-existent target node: ${edge.target}`);
+      return { isValid: false, errors };
+    }
     incomingMap.set(edge.target, (incomingMap.get(edge.target) ?? 0) + 1);
     outgoingMap.set(edge.source, (outgoingMap.get(edge.source) ?? 0) + 1);
   }
