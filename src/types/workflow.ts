@@ -11,6 +11,7 @@ export interface BaseNodeData {
 
 export interface StartNodeData extends BaseNodeData {
   type: 'start';
+  metadata?: { key: string; value: string }[];
 }
 
 export interface TaskNodeData extends BaseNodeData {
@@ -18,6 +19,7 @@ export interface TaskNodeData extends BaseNodeData {
   description?: string;
   assignee?: string;
   dueDate?: string;
+  customFields?: { key: string; value: string }[];
 }
 
 export interface ApprovalNodeData extends BaseNodeData {
@@ -29,11 +31,13 @@ export interface ApprovalNodeData extends BaseNodeData {
 export interface AutomatedNodeData extends BaseNodeData {
   type: 'automated';
   actionId?: string;
+  params?: Record<string, string>;
 }
 
 export interface EndNodeData extends BaseNodeData {
   type: 'end';
   endMessage?: string;
+  summary?: boolean;
 }
 
 export type NodeData =
@@ -41,8 +45,7 @@ export type NodeData =
   | TaskNodeData
   | ApprovalNodeData
   | AutomatedNodeData
-  | EndNodeData
-  | BaseNodeData;
+  | EndNodeData;
 
 export interface SimulationStep {
   stepId: string;
@@ -54,4 +57,5 @@ export interface SimulationStep {
 export interface SimulationResponse {
   success: boolean;
   steps: SimulationStep[];
+  error?: string;
 }

@@ -1,23 +1,23 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, type ElementType } from 'react';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Zap, Mail, Bell, FileText, type LucideIcon } from 'lucide-react';
+import { Zap, Mail, MessageSquare, Shield, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { AutomatedNodeData } from '@/types/workflow';
 
 /** Map of action IDs to their representative Lucide icon. */
-const ACTION_ICONS: Record<string, LucideIcon> = {
-  email: Mail,
-  notification: Bell,
-  report: FileText,
+const ACTION_ICONS: Record<string, ElementType> = {
+  send_email: Mail,
+  notify_slack: MessageSquare,
+  trigger_bg_check: Shield,
+  generate_offer_letter: FileText,
 };
 
-function AutomatedNodeComponent({ data, selected }: NodeProps) {
-  const nodeData = data as unknown as AutomatedNodeData;
-  const ActionIcon = (nodeData.actionId && ACTION_ICONS[nodeData.actionId]) || Zap;
+function AutomatedNodeComponent({ data, selected }: NodeProps<AutomatedNodeData>) {
+  const ActionIcon = (data.actionId && ACTION_ICONS[data.actionId]) || Zap;
 
   return (
     <Card
@@ -35,23 +35,23 @@ function AutomatedNodeComponent({ data, selected }: NodeProps) {
       />
 
       <CardHeader className="flex flex-row items-center gap-2 pb-0">
-        <div className="flex h-7 w-7 items-center justify-center rounded-md bg-purple-50">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-purple-50">
           <ActionIcon className="h-3.5 w-3.5 text-purple-600" />
         </div>
-        <div className="flex flex-col gap-0.5">
-          <CardTitle className="text-sm font-medium text-[#181d26]">
-            {nodeData.title || 'Automation'}
+        <div className="flex flex-col gap-0.5 min-w-0 flex-1">
+          <CardTitle className="text-sm font-medium text-[#181d26] truncate">
+            {data.title || 'Automation'}
           </CardTitle>
-          <Badge className="bg-purple-100 text-purple-700 border-purple-200/60 hover:bg-purple-100 w-fit">
+          <Badge className="bg-purple-100 text-purple-700 border-purple-200/60 hover:bg-purple-100 w-fit shrink-0">
             Automated
           </Badge>
         </div>
       </CardHeader>
 
       <CardContent className="pt-1">
-        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Zap className="h-3 w-3" />
-          <span>{nodeData.actionId || 'No action set'}</span>
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground w-full">
+          <Zap className="h-3 w-3 shrink-0" />
+          <span className="truncate min-w-0">{data.actionId || 'No action set'}</span>
         </div>
       </CardContent>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useRef, type DragEvent } from 'react';
+import { useCallback, useEffect, useRef, type DragEvent } from 'react';
 import {
   ReactFlow,
   Background,
@@ -10,7 +10,6 @@ import {
   useReactFlow,
   type Node,
 } from '@xyflow/react';
-import '@xyflow/react/dist/style.css';
 
 import { useWorkflowStore } from '@/store/useWorkflowStore';
 import { StartNode } from './nodes/StartNode';
@@ -62,6 +61,8 @@ function CanvasInner() {
   const onConnect = useWorkflowStore((s) => s.onConnect);
   const addNode = useWorkflowStore((s) => s.addNode);
   const setSelectedNode = useWorkflowStore((s) => s.setSelectedNode);
+  const selectedNodeId = useWorkflowStore((s) => s.selectedNodeId);
+  const deleteNode = useWorkflowStore((s) => s.deleteNode);
 
   /** Allow drop by preventing the default browser behavior. */
   const onDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
@@ -107,6 +108,36 @@ function CanvasInner() {
     setSelectedNode(null);
   }, [setSelectedNode]);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) {
+        return;
+      }
+
+      if (event.key !== 'Delete' && event.key !== 'Backspace') {
+        return;
+      }
+
+      const target = event.target;
+      if (target instanceof Element) {
+        const editableTarget = target.closest('input, textarea, select, button, [contenteditable]:not([contenteditable="false"]), [role="button"], [role="switch"], [role="combobox"]');
+        if (editableTarget) {
+          return;
+        }
+      }
+
+      if (!selectedNodeId) {
+        return;
+      }
+
+      event.preventDefault();
+      deleteNode(selectedNodeId);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [deleteNode, selectedNodeId]);
+
   return (
     <div ref={reactFlowWrapper} className="h-full w-full">
       <ReactFlow
@@ -121,7 +152,6 @@ function CanvasInner() {
         onPaneClick={onPaneClick}
         nodeTypes={nodeTypes}
         fitView
-        proOptions={{ hideAttribution: true }}
         className="bg-[#f8fafc]"
       >
         <Background

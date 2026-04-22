@@ -1,16 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { SimulationResponse, SimulationStep } from '@/types/workflow';
+import type { Node } from '@xyflow/react';
+import type { SimulationResponse, SimulationStep, NodeData } from '@/types/workflow';
 
 export async function POST(req: NextRequest) {
   try {
     const graphData = (await req.json()) as {
-      nodes?: Array<{ id?: string; data?: { title?: string } }>;
+      nodes?: Node<NodeData>[];
     };
     
     // Simulate a network/processing delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    const nodes = graphData.nodes || [];
+    const nodes = (graphData.nodes || []) as Node<NodeData>[];
     
     // Generate mock execution steps from the nodes
     const steps: SimulationStep[] = nodes.map((node, index: number) => ({
