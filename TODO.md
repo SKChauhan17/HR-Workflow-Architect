@@ -18,16 +18,16 @@
 
 ## Phase 2: Next.js Route Handlers & TanStack Query (Mock Backend)
 
-- [ ] Checkout branch: `git checkout -b mock-api-layer`
-- [ ] Define global types in `src/types/workflow.ts` (e.g., `NodeData`, `WorkflowState`, `ActionTemplate`).
-- [ ] Create `src/app/api/automations/route.ts`:
-  - [ ] Return JSON array of mock actions (e.g., `[{ id: 'email', label: 'Send Email', params: ['to', 'subject'] }]`).
-- [ ] Create `src/app/api/simulate/route.ts`:
-  - [ ] Parse incoming POST request (graph JSON).
-  - [ ] Add a simulated `await new Promise(r => setTimeout(r, 1500))` delay.
-  - [ ] Return a mock step-by-step execution timeline array.
-- [ ] Create `src/providers/QueryProvider.tsx` (Client component wrapping `<QueryClientProvider>`).
-- [ ] Wrap `src/app/layout.tsx` children with the `QueryProvider`.
+- [x] Checkout branch: `git checkout -b mock-api-layer`
+- [x] Define global types in `src/types/workflow.ts` (e.g., `NodeData`, `WorkflowState`, `ActionTemplate`).
+- [x] Create `src/app/api/automations/route.ts`:
+  - [x] Return JSON array of mock actions (e.g., `[{ id: 'email', label: 'Send Email', params: ['to', 'subject'] }]`).
+- [x] Create `src/app/api/simulate/route.ts`:
+  - [x] Parse incoming POST request (graph JSON).
+  - [x] Add a simulated `await new Promise(r => setTimeout(r, 1500))` delay.
+  - [x] Return a mock step-by-step execution timeline array.
+- [x] Create `src/providers/QueryProvider.tsx` (Client component wrapping `<QueryClientProvider>`).
+- [x] Wrap `src/app/layout.tsx` children with the `QueryProvider`.
 
 ## Phase 3: Global State Architecture (Zustand + Immer)
 
