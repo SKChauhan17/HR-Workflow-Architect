@@ -10,7 +10,6 @@ import {
   useReactFlow,
   type Node,
 } from '@xyflow/react';
-import '@xyflow/react/dist/style.css';
 
 import { useWorkflowStore } from '@/store/useWorkflowStore';
 import { StartNode } from './nodes/StartNode';
@@ -121,7 +120,7 @@ function CanvasInner() {
 
       const target = event.target;
       if (target instanceof Element) {
-        const editableTarget = target.closest('input, textarea, select, [contenteditable="true"]');
+        const editableTarget = target.closest('input, textarea, select, button, [contenteditable]:not([contenteditable="false"]), [role="button"], [role="switch"], [role="combobox"]');
         if (editableTarget) {
           return;
         }
@@ -153,7 +152,6 @@ function CanvasInner() {
         onPaneClick={onPaneClick}
         nodeTypes={nodeTypes}
         fitView
-        proOptions={{ hideAttribution: true }}
         className="bg-[#f8fafc]"
       >
         <Background
