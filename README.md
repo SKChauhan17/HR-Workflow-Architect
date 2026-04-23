@@ -33,8 +33,7 @@ HR Workflow Architect is an Airtable-inspired workflow builder for HR operations
 
 ## Live Demo
 
-🌍 **[View Live Deployment Here](https://your-deployment-url.vercel.app)**
-*(Note: Replace the URL with the actual Vercel link before final commit).*
+🌍 **[View Live Deployment Here](https://hr-workflow-architect.vercel.app/)**
 
 ## Architecture
 
