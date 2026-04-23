@@ -5,7 +5,6 @@ import { useTheme } from 'next-themes';
 import {
   ReactFlow,
   Background,
-  MiniMap,
   Controls,
   ReactFlowProvider,
   useReactFlow,
@@ -19,6 +18,7 @@ import { TaskNode } from './nodes/TaskNode';
 import { ApprovalNode } from './nodes/ApprovalNode';
 import { AutomatedNode } from './nodes/AutomatedNode';
 import { EndNode } from './nodes/EndNode';
+import { WorkflowMiniMap } from './WorkflowMiniMap';
 import type { NodeData } from '@/types/workflow';
 
 /**
@@ -36,14 +36,6 @@ const nodeTypes = {
 const edgeTypes = {
   custom: CustomEdge,
 } as const;
-
-function getMiniMapNodeColor(node: Node<NodeData>): string {
-  if (node.type === 'start') return '#22c55e';
-  if (node.type === 'task') return '#3b82f6';
-  if (node.type === 'approval') return '#f59e0b';
-  if (node.type === 'automated') return '#a855f7';
-  return '#94a3b8';
-}
 
 /** Default data payloads seeded when a node is first dropped on the canvas. */
 const DEFAULT_NODE_DATA: Record<string, NodeData> = {
@@ -144,16 +136,7 @@ function CanvasInner() {
         fitView
         className="bg-background"
       >
-        <MiniMap
-          position="bottom-right"
-          pannable
-          zoomable
-          nodeBorderRadius={4}
-          maskColor={resolvedTheme === 'dark' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.15)'}
-          className="bg-background border border-border"
-          style={{ height: 120, width: 160 }}
-          nodeColor={getMiniMapNodeColor}
-        />
+        <WorkflowMiniMap />
         <Background
           variant="dots"
           gap={20}
