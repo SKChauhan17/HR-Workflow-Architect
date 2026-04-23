@@ -31,6 +31,11 @@ HR Workflow Architect is an Airtable-inspired workflow builder for HR operations
 | Sandbox | Validates graph integrity and simulates execution |
 | Store | Manages graph state, selection, and undo history |
 
+## Live Demo
+
+🌍 **[View Live Deployment Here](https://your-deployment-url.vercel.app)**
+*(Note: Replace the URL with the actual Vercel link before final commit).*
+
 ## Architecture
 
 ```text
@@ -110,3 +115,12 @@ http://localhost:3000
 5. Export, import, or continue editing with undo and redo.
 
 This keeps the editing experience dense, legible, and safe for enterprise use.
+
+## Future Roadmap (V2)
+
+| Item | What it adds |
+| --- | --- |
+| Auto-Layout Engine | Integrates dagre to automatically format messy graphs based on edge flow. |
+| Advanced Clipboard API | Adds system-wide copy/paste with UUID regeneration and edge re-mapping for deep-copying node groups. |
+| Sub-flow Grouping | Uses React Flow's parentNode API to group multiple nodes into collapsible boundary boxes. |
+| Smart Branch Deletion | Uses recursive BFS traversal to optionally delete all downstream nodes when a parent edge or node is removed. |

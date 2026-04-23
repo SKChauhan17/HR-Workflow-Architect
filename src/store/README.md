@@ -61,3 +61,7 @@ A lightweight temporal stack stores graph snapshots before structural mutations.
 ## Design Notes
 
 This store intentionally avoids React Context. Zustand keeps the state graph simple, testable, and performant under React Flow's frequent update patterns.
+
+## V2 State Management
+
+The planned clipboard architecture for copy and paste needs an interceptor layer rather than a shallow JSON clone. On paste, every node and edge must receive brand-new UUIDs, and each edge source and target must be remapped to the newly generated node IDs before insertion. That prevents key collisions, preserves graph integrity, and lets node groups be duplicated safely without inheriting stale references.

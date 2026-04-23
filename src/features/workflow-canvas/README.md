@@ -64,3 +64,7 @@ The canvas uses semantic design tokens rather than hardcoded light-mode classes.
 - Keep node type registration outside render to avoid remount churn.
 - Prefer semantic color tokens like `bg-background`, `bg-card`, `text-foreground`, and `border-border`.
 - New node types should be added to both the canvas registry and palette template list.
+
+## V2 Canvas Architecture
+
+Auto-layout is planned for V2 via `dagrejs`, but the implementation needs to solve one hard constraint first: dynamic node heights must be known before layout reflow can run cleanly. Because several node types grow based on live form content, the next iteration will need a measurement pass or cached height map before triggering a re-layout, otherwise the graph will jitter or overlap during automatic repositioning.
