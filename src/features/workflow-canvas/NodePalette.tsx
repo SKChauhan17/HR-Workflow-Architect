@@ -1,0 +1,137 @@
+'use client';
+
+import { type DragEvent } from 'react';
+import {
+  Play,
+  ClipboardList,
+  ShieldCheck,
+  Zap,
+  CircleStop,
+  type LucideIcon,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+/** Template definition for a draggable node type. */
+interface NodeTemplate {
+  type: string;
+  label: string;
+  description: string;
+  icon: LucideIcon;
+  iconBgColor: string;
+  iconColor: string;
+}
+
+const NODE_TEMPLATES: NodeTemplate[] = [
+  {
+    type: 'start',
+    label: 'Start',
+    description: 'Workflow entry point',
+    icon: Play,
+    iconBgColor: 'bg-emerald-100',
+    iconColor: 'text-emerald-600',
+  },
+  {
+    type: 'task',
+    label: 'Task',
+    description: 'Assign work to a user',
+    icon: ClipboardList,
+    iconBgColor: 'bg-blue-100',
+    iconColor: 'text-blue-600',
+  },
+  {
+    type: 'approval',
+    label: 'Approval',
+    description: 'Require sign-off',
+    icon: ShieldCheck,
+    iconBgColor: 'bg-amber-100',
+    iconColor: 'text-amber-600',
+  },
+  {
+    type: 'automated',
+    label: 'Automated',
+    description: 'Trigger an action',
+    icon: Zap,
+    iconBgColor: 'bg-purple-100',
+    iconColor: 'text-purple-600',
+  },
+  {
+    type: 'end',
+    label: 'End',
+    description: 'Workflow termination',
+    icon: CircleStop,
+    iconBgColor: 'bg-slate-100',
+    iconColor: 'text-slate-600',
+  },
+];
+
+function onDragStart(event: DragEvent<HTMLDivElement>, nodeType: string) {
+  event.dataTransfer.setData('application/reactflow', nodeType);
+  event.dataTransfer.effectAllowed = 'move';
+}
+
+export function NodePalette() {
+  return (
+    <aside className="flex h-full w-64 shrink-0 flex-col border-r border-border bg-background text-foreground">
+      {/* Header */}
+      <div className="flex items-center gap-2.5 border-b border-border px-4 py-3.5">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-5 w-5 text-blue-500">
+          <circle cx="18" cy="5" r="3" />
+          <circle cx="6" cy="12" r="3" />
+          <circle cx="18" cy="19" r="3" />
+          <line x1="8.5" y1="10.5" x2="15.5" y2="6.5" />
+          <line x1="8.5" y1="13.5" x2="15.5" y2="17.5" />
+        </svg>
+        <div>
+          <h2 className="text-[13px] font-semibold text-foreground">
+            Node Palette
+          </h2>
+          <p className="text-[11px] leading-tight text-muted-foreground">
+            Drag to canvas
+          </p>
+        </div>
+      </div>
+
+      {/* Node Templates */}
+      <div className="flex flex-col gap-1.5 p-3">
+        <p className="px-1 pb-1 text-[11px] font-medium text-muted-foreground">
+          Components
+        </p>
+
+        {NODE_TEMPLATES.map((template) => {
+          const Icon = template.icon;
+
+          return (
+            <div
+              key={template.type}
+              draggable
+              onDragStart={(e) => onDragStart(e, template.type)}
+              className={cn(
+                'flex cursor-grab items-center gap-3 rounded-xl border border-border bg-card px-3 py-2.5',
+                'shadow-sm transition-all duration-200',
+                'hover:border-primary/40 hover:shadow-md',
+                'active:cursor-grabbing active:scale-[0.98]'
+              )}
+            >
+              <div
+                className={cn(
+                  'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg',
+                  template.iconBgColor
+                )}
+              >
+                <Icon className={cn('h-4 w-4', template.iconColor)} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[13px] font-medium text-foreground">
+                  {template.label}
+                </span>
+                <span className="text-[11px] leading-tight text-muted-foreground">
+                  {template.description}
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </aside>
+  );
+}

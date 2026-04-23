@@ -1,17 +1,19 @@
 'use client';
 
-import { useCallback, useEffect, useRef, type DragEvent } from 'react';
+import { useCallback, useRef, type DragEvent } from 'react';
+import { useTheme } from 'next-themes';
 import {
   ReactFlow,
   Background,
+  MiniMap,
   Controls,
-  BackgroundVariant,
   ReactFlowProvider,
   useReactFlow,
   type Node,
 } from '@xyflow/react';
 
 import { useWorkflowStore } from '@/store/useWorkflowStore';
+import { CustomEdge } from './CustomEdge';
 import { StartNode } from './nodes/StartNode';
 import { TaskNode } from './nodes/TaskNode';
 import { ApprovalNode } from './nodes/ApprovalNode';
@@ -30,6 +32,18 @@ const nodeTypes = {
   automated: AutomatedNode,
   end: EndNode,
 } as const;
+
+const edgeTypes = {
+  custom: CustomEdge,
+} as const;
+
+function getMiniMapNodeColor(node: Node<NodeData>): string {
+  if (node.type === 'start') return '#22c55e';
+  if (node.type === 'task') return '#3b82f6';
+  if (node.type === 'approval') return '#f59e0b';
+  if (node.type === 'automated') return '#a855f7';
+  return '#94a3b8';
+}
 
 /** Default data payloads seeded when a node is first dropped on the canvas. */
 const DEFAULT_NODE_DATA: Record<string, NodeData> = {
@@ -53,6 +67,7 @@ function generateNodeId(): string {
 function CanvasInner() {
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
   const { screenToFlowPosition } = useReactFlow();
+  const { resolvedTheme } = useTheme();
 
   const nodes = useWorkflowStore((s) => s.nodes);
   const edges = useWorkflowStore((s) => s.edges);
@@ -61,8 +76,6 @@ function CanvasInner() {
   const onConnect = useWorkflowStore((s) => s.onConnect);
   const addNode = useWorkflowStore((s) => s.addNode);
   const setSelectedNode = useWorkflowStore((s) => s.setSelectedNode);
-  const selectedNodeId = useWorkflowStore((s) => s.selectedNodeId);
-  const deleteNode = useWorkflowStore((s) => s.deleteNode);
 
   /** Allow drop by preventing the default browser behavior. */
   const onDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
@@ -97,7 +110,8 @@ function CanvasInner() {
 
   /** Track which node is selected. */
   const onNodeClick = useCallback(
-    (_: React.MouseEvent, node: Node<NodeData>) => {
+    (event: React.MouseEvent, node: Node<NodeData>) => {
+      event.stopPropagation();
       setSelectedNode(node.id);
     },
     [setSelectedNode]
@@ -108,39 +122,10 @@ function CanvasInner() {
     setSelectedNode(null);
   }, [setSelectedNode]);
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) {
-        return;
-      }
-
-      if (event.key !== 'Delete' && event.key !== 'Backspace') {
-        return;
-      }
-
-      const target = event.target;
-      if (target instanceof Element) {
-        const editableTarget = target.closest('input, textarea, select, button, [contenteditable]:not([contenteditable="false"]), [role="button"], [role="switch"], [role="combobox"]');
-        if (editableTarget) {
-          return;
-        }
-      }
-
-      if (!selectedNodeId) {
-        return;
-      }
-
-      event.preventDefault();
-      deleteNode(selectedNodeId);
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [deleteNode, selectedNodeId]);
-
   return (
     <div ref={reactFlowWrapper} className="h-full w-full">
       <ReactFlow
+        colorMode={resolvedTheme === 'dark' ? 'dark' : 'light'}
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -150,18 +135,33 @@ function CanvasInner() {
         onDrop={onDrop}
         onNodeClick={onNodeClick}
         onPaneClick={onPaneClick}
+        elementsSelectable={true}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
+        defaultEdgeOptions={{ type: 'custom', style: { stroke: '#6366f1', strokeWidth: 2 } }}
+        deleteKeyCode={['Backspace', 'Delete']}
+        selectionKeyCode={['Shift']}
         fitView
-        className="bg-[#f8fafc]"
+        className="bg-background"
       >
+        <MiniMap
+          position="bottom-right"
+          pannable
+          zoomable
+          nodeBorderRadius={4}
+          maskColor={resolvedTheme === 'dark' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.15)'}
+          className="bg-background border border-border"
+          style={{ height: 120, width: 160 }}
+          nodeColor={getMiniMapNodeColor}
+        />
         <Background
-          variant={BackgroundVariant.Dots}
+          variant="dots"
           gap={20}
           size={1}
-          color="#e0e2e6"
+          color={resolvedTheme === 'dark' ? '#334155' : '#e0e2e6'}
         />
         <Controls
-          className="!rounded-xl !border !border-[#e0e2e6] !shadow-sm"
+          className="!rounded-xl !border !border-border !shadow-sm"
           showInteractive={false}
         />
       </ReactFlow>
