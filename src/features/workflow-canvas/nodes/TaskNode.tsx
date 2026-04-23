@@ -12,7 +12,7 @@ function TaskNodeComponent({ data, selected }: NodeProps<Node<TaskNodeData>>) {
   return (
     <Card
       className={cn(
-        'w-[240px] border border-[#e0e2e6] bg-white shadow-sm transition-shadow duration-200',
+        'w-[240px] border border-border bg-card shadow-sm transition-shadow duration-200',
         selected && 'ring-2 ring-blue-500/50 shadow-md'
       )}
       size="sm"
@@ -29,7 +29,7 @@ function TaskNodeComponent({ data, selected }: NodeProps<Node<TaskNodeData>>) {
           <ClipboardList className="h-3.5 w-3.5 text-blue-600" />
         </div>
         <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-          <CardTitle className="text-sm font-medium text-[#181d26] truncate">
+          <CardTitle className="text-sm font-medium text-foreground truncate">
             {data.title || 'Task'}
           </CardTitle>
           <Badge className="bg-blue-100 text-blue-700 border-blue-200/60 hover:bg-blue-100 w-fit shrink-0">

@@ -12,7 +12,7 @@ function EndNodeComponent({ data, selected }: NodeProps<Node<EndNodeData>>) {
   return (
     <Card
       className={cn(
-        'w-[200px] border border-[#e0e2e6] bg-white shadow-sm transition-shadow duration-200',
+        'w-[200px] border border-border bg-card shadow-sm transition-shadow duration-200',
         selected && 'ring-2 ring-slate-500/50 shadow-md'
       )}
       size="sm"
@@ -28,13 +28,13 @@ function EndNodeComponent({ data, selected }: NodeProps<Node<EndNodeData>>) {
         <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-slate-100">
           <CircleStop className="h-3.5 w-3.5 text-slate-600" />
         </div>
-        <CardTitle className="text-sm font-medium text-[#181d26] truncate min-w-0 flex-1">
+        <CardTitle className="text-sm font-medium text-foreground truncate min-w-0 flex-1">
           {data.title || 'End'}
         </CardTitle>
       </CardHeader>
 
       <CardContent className="flex flex-col gap-1.5 pt-1">
-        <Badge className="bg-slate-100 text-slate-600 border-slate-200/60 hover:bg-slate-100 w-fit shrink-0">
+        <Badge className="bg-slate-100 text-slate-600 border-border hover:bg-slate-100 w-fit shrink-0">
           End
         </Badge>
         {data.endMessage && (

@@ -12,7 +12,7 @@ function ApprovalNodeComponent({ data, selected }: NodeProps<Node<ApprovalNodeDa
   return (
     <Card
       className={cn(
-        'w-[240px] border border-[#e0e2e6] bg-white shadow-sm transition-shadow duration-200',
+        'w-[240px] border border-border bg-card shadow-sm transition-shadow duration-200',
         selected && 'ring-2 ring-amber-500/50 shadow-md'
       )}
       size="sm"
@@ -29,7 +29,7 @@ function ApprovalNodeComponent({ data, selected }: NodeProps<Node<ApprovalNodeDa
           <ShieldCheck className="h-3.5 w-3.5 text-amber-600" />
         </div>
         <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-          <CardTitle className="text-sm font-medium text-[#181d26] truncate">
+          <CardTitle className="text-sm font-medium text-foreground truncate">
             {data.title || 'Approval'}
           </CardTitle>
           <Badge className="bg-amber-100 text-amber-700 border-amber-200/60 hover:bg-amber-100 w-fit shrink-0">
