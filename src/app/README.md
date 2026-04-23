@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Next.js_App_Router-Shell-141413?style=for-the-badge" alt="Next.js App Router" />
-  <img src="https://img.shields.io/badge/ThemeProvider-next-themes-f5f4ed?style=for-the-badge&labelColor=141413&color=e8e6dc" alt="Theme Provider" />
+  <img src="https://img.shields.io/badge/ThemeProvider-next--themes-f5f4ed?style=for-the-badge&labelColor=141413&color=e8e6dc" alt="Theme Provider" />
   <img src="https://img.shields.io/badge/Route_Handlers-API_Surface-f5f4ed?style=for-the-badge&labelColor=141413&color=e8e6dc" alt="Route Handlers" />
 </p>
 

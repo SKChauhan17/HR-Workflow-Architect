@@ -18,17 +18,12 @@
   <circle cx="1414" cy="388" r="52" fill="#1b61c9" opacity="0.11" />
   <path d="M150 348c110-62 220-62 330 0s220 62 330 0 220-62 330 0 220 62 330 0" fill="none" stroke="#1b61c9" stroke-width="8" stroke-linecap="round" opacity="0.2" />
 
-  <g transform="translate(112 126)">
+  <g transform="translate(64 126)">
     <rect x="0" y="0" width="110" height="110" rx="28" fill="#f8fafc" stroke="#d9e2ef" stroke-width="2" />
     <circle cx="34" cy="38" r="7" fill="#1b61c9" />
     <circle cx="78" cy="38" r="7" fill="#1b61c9" opacity="0.72" />
     <circle cx="56" cy="76" r="7" fill="#1b61c9" />
     <path d="M41 38h28M42 69l10-18M70 69l-10-18" fill="none" stroke="#1b61c9" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
-  </g>
-
-  <g transform="translate(258 116)">
-    <rect x="0" y="0" width="184" height="42" rx="21" fill="#1b61c9" />
-    <text x="92" y="27" text-anchor="middle" fill="#ffffff" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="17" font-weight="600" letter-spacing="0.01em">Airtable Inspired</text>
   </g>
 
   <text x="112" y="250" fill="#181d26" font-family="Georgia, 'Times New Roman', serif" font-size="68" font-weight="700" letter-spacing="-0.04em">HR Workflow Architect</text>
