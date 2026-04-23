@@ -1,8 +1,28 @@
+<p align="center">
+    <img src="../../../.github/assets/readme-workflow-canvas-hero.svg" alt="Workflow Canvas Hero" width="100%" />
+</p>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/React_Flow-Canvas_Core-141413?style=for-the-badge" alt="React Flow" />
+    <img src="https://img.shields.io/badge/Edges-Custom_Delete-f5f4ed?style=for-the-badge&labelColor=141413&color=e8e6dc" alt="Custom edges" />
+    <img src="https://img.shields.io/badge/MiniMap-Themed-f5f4ed?style=for-the-badge&labelColor=141413&color=e8e6dc" alt="MiniMap" />
+</p>
+
+<p align="center">
+    <a href="../../../README.md">Project Root</a> ·
+    <a href="../../app/README.md">App Shell</a> ·
+    <a href="../workflow-forms/README.md">Forms</a> ·
+    <a href="../workflow-sandbox/README.md">Sandbox</a> ·
+    <a href="../../store/README.md">Store</a>
+</p>
+
+---
+
 # Workflow Canvas
 
 ## Overview
 
-The workflow canvas is the visual engine of HR Workflow Designer. It combines React Flow, custom node rendering, semantic Tailwind styling, and a themed MiniMap to deliver a dense but readable enterprise canvas.
+The workflow canvas is the visual engine of HR Workflow Architect. It combines React Flow, custom node rendering, semantic Tailwind styling, and a themed MiniMap to deliver a dense but readable enterprise canvas.
 
 ## Component Map
 
@@ -10,7 +30,7 @@ The workflow canvas is the visual engine of HR Workflow Designer. It combines Re
 | --- | --- | --- |
 | `WorkflowCanvas` | Hosts the React Flow provider and canvas shell | Wires selection, drag/drop, edges, and theme-aware rendering |
 | `CustomEdge` | Renders premium curved edges with inline delete controls | Uses `BaseEdge`, `getBezierPath`, and `EdgeLabelRenderer` |
-| `NodePalette` / `DraggableSidebar` | Presents draggable workflow templates | Shares the same branding icon as the top header |
+| `NodePalette` / `DraggableSidebar` | Presents draggable workflow templates | Shares the same editorial branding language as the top header |
 | `StartNode`, `TaskNode`, `ApprovalNode`, `AutomatedNode`, `EndNode` | Custom enterprise node cards | Built with Shadcn card primitives and typed node data |
 
 ## Architecture

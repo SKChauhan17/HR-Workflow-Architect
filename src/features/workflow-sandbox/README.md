@@ -1,3 +1,23 @@
+<p align="center">
+   <img src="../../../.github/assets/readme-workflow-sandbox-hero.svg" alt="Workflow Sandbox Hero" width="100%" />
+</p>
+
+<p align="center">
+   <img src="https://img.shields.io/badge/Validation-DFS_Checks-141413?style=for-the-badge" alt="Validation" />
+   <img src="https://img.shields.io/badge/TanStack_Query-Simulation-f5f4ed?style=for-the-badge&labelColor=141413&color=e8e6dc" alt="TanStack Query" />
+   <img src="https://img.shields.io/badge/Execution-Mock_Timeline-f5f4ed?style=for-the-badge&labelColor=141413&color=e8e6dc" alt="Execution" />
+</p>
+
+<p align="center">
+   <a href="../../../README.md">Project Root</a> ·
+   <a href="../../app/README.md">App Shell</a> ·
+   <a href="../workflow-canvas/README.md">Canvas</a> ·
+   <a href="../workflow-forms/README.md">Forms</a> ·
+   <a href="../../store/README.md">Store</a>
+</p>
+
+---
+
 # Workflow Sandbox
 
 ## Overview
