@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useRef, type DragEvent } from 'react';
+import { useCallback, useEffect, useRef, useState, type DragEvent } from 'react';
 import { useTheme } from 'next-themes';
 import {
   ReactFlow,
@@ -61,6 +61,12 @@ function CanvasInner() {
   const reactFlowWrapper = useRef<HTMLDivElement>(null);
   const { screenToFlowPosition } = useReactFlow();
   const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const nodes = useWorkflowStore((s) => s.nodes);
   const edges = useWorkflowStore((s) => s.edges);
@@ -115,6 +121,10 @@ function CanvasInner() {
     setSelectedNode(null);
   }, [setSelectedNode]);
 
+  if (!mounted || !resolvedTheme) {
+    return <div className="flex-1 bg-background" />;
+  }
+
   return (
     <div ref={reactFlowWrapper} className="h-full w-full">
       <ReactFlow
@@ -145,7 +155,8 @@ function CanvasInner() {
           color={resolvedTheme === 'dark' ? '#334155' : '#e0e2e6'}
         />
         <Controls
-          className="!rounded-xl !border !border-border !shadow-sm"
+          className="!rounded-xl !border !border-border !bg-background !text-foreground !shadow-sm"
+          style={{ backgroundColor: 'var(--background)', fill: 'var(--foreground)' }}
           showInteractive={false}
         />
       </ReactFlow>

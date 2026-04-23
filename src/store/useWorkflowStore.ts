@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import type { Draft } from 'immer';
 import {
@@ -63,192 +64,201 @@ interface WorkflowState {
 }
 
 export const useWorkflowStore = create<WorkflowState>()(
-  immer((set) => ({
-    /* ── Initial State ──────────────────────────────────── */
-    nodes: [],
-    edges: [],
-    selectedNodeId: null,
-    past: [],
-    future: [],
+  persist(
+    immer((set) => ({
+      /* ── Initial State ──────────────────────────────────── */
+      nodes: [],
+      edges: [],
+      selectedNodeId: null,
+      past: [],
+      future: [],
 
-    /* ── React Flow Handlers ────────────────────────────── */
-    onNodesChange: (changes) => {
-      set((state) => {
-        const hasStructuralChange = changes.some(
-          (change) =>
-            change.type === 'remove' ||
-            change.type === 'add' ||
-            change.type === 'replace'
-        );
+      /* ── React Flow Handlers ────────────────────────────── */
+      onNodesChange: (changes) => {
+        set((state) => {
+          const hasStructuralChange = changes.some(
+            (change) =>
+              change.type === 'remove' ||
+              change.type === 'add' ||
+              change.type === 'replace'
+          );
 
-        if (hasStructuralChange) {
+          if (hasStructuralChange) {
+            pushHistory(state);
+          }
+
+          state.nodes = applyNodeChanges<Node<NodeData>>(changes, state.nodes);
+
+          if (
+            state.selectedNodeId &&
+            !state.nodes.some((node) => node.id === state.selectedNodeId)
+          ) {
+            state.selectedNodeId = null;
+          }
+        });
+      },
+
+      onEdgesChange: (changes) => {
+        set((state) => {
+          const hasStructuralChange = changes.some(
+            (change) =>
+              change.type === 'remove' ||
+              change.type === 'add' ||
+              change.type === 'replace'
+          );
+
+          if (hasStructuralChange) {
+            pushHistory(state);
+          }
+
+          state.edges = applyEdgeChanges(changes, state.edges);
+        });
+      },
+
+      onConnect: (connection) => {
+        set((state) => {
           pushHistory(state);
-        }
+          state.edges = addEdge({ ...connection, type: 'custom' }, state.edges);
+        });
+      },
 
-        state.nodes = applyNodeChanges<Node<NodeData>>(changes, state.nodes);
-
-        if (
-          state.selectedNodeId &&
-          !state.nodes.some((node) => node.id === state.selectedNodeId)
-        ) {
-          state.selectedNodeId = null;
-        }
-      });
-    },
-
-    onEdgesChange: (changes) => {
-      set((state) => {
-        const hasStructuralChange = changes.some(
-          (change) =>
-            change.type === 'remove' ||
-            change.type === 'add' ||
-            change.type === 'replace'
-        );
-
-        if (hasStructuralChange) {
+      /* ── Custom Actions ─────────────────────────────────── */
+      addNode: (node) => {
+        set((state) => {
           pushHistory(state);
-        }
+          state.nodes.push(node);
+        });
+      },
 
-        state.edges = applyEdgeChanges(changes, state.edges);
-      });
-    },
+      updateNodeData: (id, data) => {
+        set((state) => {
+          const node = state.nodes.find((n) => n.id === id);
+          if (node) {
+            Object.assign(node.data, data);
+          }
+        });
+      },
 
-    onConnect: (connection) => {
-      set((state) => {
-        pushHistory(state);
-        state.edges = addEdge({ ...connection, type: 'custom' }, state.edges);
-      });
-    },
+      setSelectedNode: (id) => {
+        set((state) => {
+          state.selectedNodeId = id;
+        });
+      },
 
-    /* ── Custom Actions ─────────────────────────────────── */
-    addNode: (node) => {
-      set((state) => {
-        pushHistory(state);
-        state.nodes.push(node);
-      });
-    },
+      deleteSelectedElements: () => {
+        set((state) => {
+          const selectedNodeIds = new Set(
+            state.nodes.filter((node) => node.selected).map((node) => node.id)
+          );
+          const hasSelectedNodes = selectedNodeIds.size > 0;
+          const hasSelectedEdges = state.edges.some((edge) => edge.selected);
 
-    updateNodeData: (id, data) => {
-      set((state) => {
-        const node = state.nodes.find((n) => n.id === id);
-        if (node) {
-          Object.assign(node.data, data);
-        }
-      });
-    },
+          if (!hasSelectedNodes && !hasSelectedEdges) {
+            return;
+          }
 
-    setSelectedNode: (id) => {
-      set((state) => {
-        state.selectedNodeId = id;
-      });
-    },
+          pushHistory(state);
 
-    deleteSelectedElements: () => {
-      set((state) => {
-        const selectedNodeIds = new Set(
-          state.nodes.filter((node) => node.selected).map((node) => node.id)
-        );
-        const hasSelectedNodes = selectedNodeIds.size > 0;
-        const hasSelectedEdges = state.edges.some((edge) => edge.selected);
+          state.nodes = state.nodes.filter((node) => !selectedNodeIds.has(node.id));
+          state.edges = state.edges.filter(
+            (edge) =>
+              !edge.selected &&
+              !selectedNodeIds.has(edge.source) &&
+              !selectedNodeIds.has(edge.target)
+          );
 
-        if (!hasSelectedNodes && !hasSelectedEdges) {
-          return;
-        }
+          if (state.selectedNodeId && selectedNodeIds.has(state.selectedNodeId)) {
+            state.selectedNodeId = null;
+          }
+        });
+      },
 
-        pushHistory(state);
+      deleteNode: (id) => {
+        set((state) => {
+          const nodeExists = state.nodes.some((node) => node.id === id);
+          if (!nodeExists) {
+            return;
+          }
 
-        state.nodes = state.nodes.filter((node) => !selectedNodeIds.has(node.id));
-        state.edges = state.edges.filter(
-          (edge) =>
-            !edge.selected &&
-            !selectedNodeIds.has(edge.source) &&
-            !selectedNodeIds.has(edge.target)
-        );
+          pushHistory(state);
 
-        if (state.selectedNodeId && selectedNodeIds.has(state.selectedNodeId)) {
+          state.nodes = state.nodes.filter((n) => n.id !== id);
+          state.edges = state.edges.filter((e) => e.source !== id && e.target !== id);
+
+          if (state.selectedNodeId === id) {
+            state.selectedNodeId = null;
+          }
+        });
+      },
+
+      deleteEdge: (id) => {
+        set((state) => {
+          const edgeExists = state.edges.some((edge) => edge.id === id);
+          if (!edgeExists) {
+            return;
+          }
+
+          pushHistory(state);
+          state.edges = state.edges.filter((edge) => edge.id !== id);
+        });
+      },
+
+      undo: () => {
+        set((state) => {
+          const previous = state.past.pop();
+          if (!previous) {
+            return;
+          }
+
+          state.future.push(cloneGraph(state.nodes, state.edges));
+          state.nodes = previous.nodes;
+          state.edges = previous.edges;
           state.selectedNodeId = null;
-        }
-      });
-    },
+        });
+      },
 
-    deleteNode: (id) => {
-      set((state) => {
-        const nodeExists = state.nodes.some((node) => node.id === id);
-        if (!nodeExists) {
-          return;
-        }
+      redo: () => {
+        set((state) => {
+          const next = state.future.pop();
+          if (!next) {
+            return;
+          }
 
-        pushHistory(state);
-
-        state.nodes = state.nodes.filter((n) => n.id !== id);
-        state.edges = state.edges.filter((e) => e.source !== id && e.target !== id);
-
-        if (state.selectedNodeId === id) {
+          state.past.push(cloneGraph(state.nodes, state.edges));
+          state.nodes = next.nodes;
+          state.edges = next.edges;
           state.selectedNodeId = null;
-        }
-      });
-    },
+        });
+      },
 
-    deleteEdge: (id) => {
-      set((state) => {
-        const edgeExists = state.edges.some((edge) => edge.id === id);
-        if (!edgeExists) {
-          return;
-        }
+      clearCanvas: () => {
+        set((state) => {
+          if (state.nodes.length === 0 && state.edges.length === 0) {
+            return;
+          }
 
-        pushHistory(state);
-        state.edges = state.edges.filter((edge) => edge.id !== id);
-      });
-    },
+          pushHistory(state);
+          state.nodes = [];
+          state.edges = [];
+          state.selectedNodeId = null;
+        });
+      },
 
-    undo: () => {
-      set((state) => {
-        const previous = state.past.pop();
-        if (!previous) {
-          return;
-        }
-
-        state.future.push(cloneGraph(state.nodes, state.edges));
-        state.nodes = previous.nodes;
-        state.edges = previous.edges;
-        state.selectedNodeId = null;
-      });
-    },
-
-    redo: () => {
-      set((state) => {
-        const next = state.future.pop();
-        if (!next) {
-          return;
-        }
-
-        state.past.push(cloneGraph(state.nodes, state.edges));
-        state.nodes = next.nodes;
-        state.edges = next.edges;
-        state.selectedNodeId = null;
-      });
-    },
-
-    clearCanvas: () => {
-      set((state) => {
-        if (state.nodes.length === 0 && state.edges.length === 0) {
-          return;
-        }
-
-        pushHistory(state);
-        state.nodes = [];
-        state.edges = [];
-        state.selectedNodeId = null;
-      });
-    },
-
-    importGraph: (nodes, edges) => {
-      set((state) => {
-        pushHistory(state);
-        state.nodes = structuredClone(nodes);
-        state.edges = structuredClone(edges);
-        state.selectedNodeId = null;
-      });
-    },
-  }))
+      importGraph: (nodes, edges) => {
+        set((state) => {
+          pushHistory(state);
+          state.nodes = structuredClone(nodes);
+          state.edges = structuredClone(edges);
+          state.selectedNodeId = null;
+        });
+      },
+    })),
+    {
+      name: 'hr-workflow-storage',
+      partialize: (state) => ({
+        nodes: state.nodes,
+        edges: state.edges,
+      }),
+    }
+  )
 );
