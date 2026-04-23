@@ -14,11 +14,10 @@
   <g filter="url(#cardShadow)">
     <rect x="58" y="58" width="1484" height="384" rx="34" fill="#fffdf8" stroke="#e6dfd1" stroke-width="2" />
   </g>
-  <circle cx="1360" cy="108" r="92" fill="#1b61c9" opacity="0.08" />
   <circle cx="1414" cy="388" r="52" fill="#1b61c9" opacity="0.11" />
   <path d="M150 348c110-62 220-62 330 0s220 62 330 0 220-62 330 0 220 62 330 0" fill="none" stroke="#1b61c9" stroke-width="8" stroke-linecap="round" opacity="0.2" />
 
-  <g transform="translate(64 126)">
+  <g transform="translate(1340 126)">
     <rect x="0" y="0" width="110" height="110" rx="28" fill="#f8fafc" stroke="#d9e2ef" stroke-width="2" />
     <circle cx="34" cy="38" r="7" fill="#1b61c9" />
     <circle cx="78" cy="38" r="7" fill="#1b61c9" opacity="0.72" />
