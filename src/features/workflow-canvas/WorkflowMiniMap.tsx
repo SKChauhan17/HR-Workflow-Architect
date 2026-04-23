@@ -54,7 +54,8 @@ function getNodeDimensions(node: Node<NodeData>) {
 }
 
 function getNodePosition(node: Node<NodeData>) {
-  const position = node.positionAbsolute ?? node.position;
+  // Cast to any to bypass v12 strict typing for internal properties.
+  const position = (node as any).positionAbsolute ?? node.position;
 
   return {
     x: position.x,
