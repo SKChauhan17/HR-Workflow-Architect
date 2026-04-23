@@ -5,6 +5,7 @@ import { useTheme } from 'next-themes';
 import {
   ReactFlow,
   Background,
+  BackgroundVariant,
   Controls,
   ReactFlowProvider,
   useReactFlow,
@@ -138,7 +139,7 @@ function CanvasInner() {
       >
         <WorkflowMiniMap />
         <Background
-          variant="dots"
+          variant={BackgroundVariant.Dots}
           gap={20}
           size={1}
           color={resolvedTheme === 'dark' ? '#334155' : '#e0e2e6'}
