@@ -1,4 +1,4 @@
-# HR Workflow Designer - Next.js Enterprise Implementation Tracker
+# HR Workflow Architect - Next.js Enterprise Implementation Tracker
 
 ## Phase 1: Next.js, Shadcn, & Architecture Initialization (Strictly pnpm)
 
