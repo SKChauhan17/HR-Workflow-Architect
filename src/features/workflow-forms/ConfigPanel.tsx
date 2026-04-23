@@ -3,7 +3,6 @@
 import { useWorkflowStore } from '@/store/useWorkflowStore';
 import { Settings, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 import { StartNodeForm } from './components/StartNodeForm';
 import { TaskNodeForm } from './components/TaskNodeForm';
@@ -28,14 +27,14 @@ export function ConfigPanel() {
   // If no node selected, show the empty state
   if (!selectedNodeId || !selectedNode) {
     return (
-      <aside className="flex w-80 shrink-0 flex-col border-l border-border bg-white h-full relative">
+      <aside className="relative flex h-full w-80 shrink-0 flex-col border-l border-border bg-background text-foreground">
         <div className="flex items-center gap-2.5 border-b border-border px-4 py-3.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 shadow-sm">
-            <Settings className="h-4 w-4 text-slate-500" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted shadow-sm">
+            <Settings className="h-4 w-4 text-muted-foreground" />
           </div>
           <div>
-            <h2 className="text-[13px] font-semibold text-slate-900">Configuration</h2>
-            <p className="text-[11px] text-slate-500 leading-tight">Select a node to configure</p>
+            <h2 className="text-[13px] font-semibold text-foreground">Configuration</h2>
+            <p className="text-[11px] text-muted-foreground leading-tight">Select a node to configure</p>
           </div>
         </div>
 
@@ -45,8 +44,8 @@ export function ConfigPanel() {
               <Settings className="h-5 w-5 text-muted-foreground" />
             </div>
             <div>
-              <p className="text-sm font-medium text-slate-900">No Node Selected</p>
-              <p className="mt-1 text-xs text-slate-400 leading-relaxed max-w-[200px]">
+              <p className="text-sm font-medium text-foreground">No Node Selected</p>
+              <p className="mt-1 max-w-[200px] text-xs leading-relaxed text-muted-foreground">
                 Click a node on the canvas or drag one from the palette to get started.
               </p>
             </div>
@@ -83,27 +82,27 @@ export function ConfigPanel() {
   }
 
   return (
-    <aside className="flex w-80 shrink-0 flex-col border-l border-border bg-white h-[100vh] relative z-10">
+    <aside className="relative z-10 flex h-full w-80 shrink-0 flex-col border-l border-border bg-background text-foreground">
       <div className="flex items-center gap-2.5 border-b border-border px-4 py-3.5">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 shadow-sm">
           <Settings className="h-4 w-4 text-primary" />
         </div>
         <div>
-          <h2 className="text-[13px] font-semibold text-slate-900 capitalize px-1">{nodeType} Node</h2>
-          <p className="text-[11px] text-slate-500 leading-tight px-1">ID: {selectedNode.id.split('_').pop() || selectedNode.id}</p>
+          <h2 className="px-1 text-[13px] font-semibold capitalize text-foreground">{nodeType} Node</h2>
+          <p className="px-1 text-[11px] leading-tight text-muted-foreground">ID: {selectedNode.id.split('_').pop() || selectedNode.id}</p>
         </div>
       </div>
 
-      <ScrollArea className="flex-1">
+      <div className="flex-1 overflow-y-auto">
         <div className="p-6">
           {FormComponent}
         </div>
-      </ScrollArea>
+      </div>
 
-      <div className="p-4 border-t border-border bg-slate-50/50 mt-auto">
+      <div className="mt-auto border-t border-border bg-muted p-4">
         <Button 
           variant="destructive" 
-          className="w-full shadow-none gap-2 text-xs" 
+          className="w-full gap-2 border border-red-200 bg-red-50 text-red-700 shadow-sm hover:border-red-300 hover:bg-red-100 dark:border-red-400/40 dark:bg-red-500/25 dark:text-red-50 dark:hover:border-red-300 dark:hover:bg-red-500/35 text-xs"
           size="sm"
           onClick={() => deleteNode(selectedNodeId)}
         >

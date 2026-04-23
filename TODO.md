@@ -1,4 +1,4 @@
-# HR Workflow Designer - Next.js Enterprise Implementation Tracker
+# HR Workflow Architect - Next.js Enterprise Implementation Tracker
 
 ## Phase 1: Next.js, Shadcn, & Architecture Initialization (Strictly pnpm)
 
@@ -85,12 +85,12 @@
 
 ## Phase 7: Polish, Export, & Documentation
 
-- [ ] Checkout branch: `git checkout -b final-polish`
-- [ ] Enable React Flow `<MiniMap>` and `<Background>`.
-- [ ] Add "Export JSON" button (Downloads Zustand `nodes` and `edges` state).
-- [ ] Add "Import JSON" button (File reader that hydrates Zustand state).
-- [ ] Ensure global Dark Mode / Light Mode toggle works via Next-Themes.
-- [ ] Write the `README.md`:
-  - [ ] Local setup steps.
-  - [ ] Architecture decisions (Next.js App Router, Zustand+Immer mutability, strict Zod validation).
-  - [ ] Features implemented (Cycle detection, dynamic API forms).
+- [x] Checkout branch: `git checkout -b final-polish`
+- [x] Enable React Flow `<MiniMap>` and `<Background>`.
+- [x] Add "Export JSON" button (Downloads Zustand `nodes` and `edges` state).
+- [x] Add "Import JSON" button (File reader that hydrates Zustand state).
+- [x] Ensure global Dark Mode / Light Mode toggle works via Next-Themes.
+- [x] Write the `README.md`:
+  - [x] Local setup steps.
+  - [x] Architecture decisions (Next.js App Router, Zustand+Immer mutability, strict Zod validation).
+  - [x] Features implemented (Cycle detection, dynamic API forms).

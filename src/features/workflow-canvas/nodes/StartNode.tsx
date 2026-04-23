@@ -12,7 +12,7 @@ function StartNodeComponent({ data, selected }: NodeProps<Node<StartNodeData>>) 
   return (
     <Card
       className={cn(
-        'w-[200px] border border-[#e0e2e6] bg-white shadow-sm transition-shadow duration-200',
+        'w-[200px] border border-border bg-card shadow-sm transition-shadow duration-200',
         selected && 'ring-2 ring-emerald-500/50 shadow-md'
       )}
       size="sm"
@@ -21,7 +21,7 @@ function StartNodeComponent({ data, selected }: NodeProps<Node<StartNodeData>>) 
         <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-emerald-50">
           <Play className="h-3.5 w-3.5 text-emerald-600" />
         </div>
-        <CardTitle className="text-sm font-medium text-[#181d26] truncate min-w-0 flex-1">
+        <CardTitle className="text-sm font-medium text-foreground truncate min-w-0 flex-1">
           {data.title || 'Start'}
         </CardTitle>
       </CardHeader>

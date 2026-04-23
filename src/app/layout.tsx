@@ -12,9 +12,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "HR Workflow Designer",
+  title: "HR Workflow Architect",
   description:
-    "Enterprise workflow designer for HR processes — build, validate, and simulate approval pipelines visually.",
+    "Enterprise workflow architect for HR processes — build, validate, and simulate approval pipelines visually.",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} h-full`}>
       <body className="min-h-full flex flex-col font-sans antialiased">
         <ThemeProvider
           attribute="class"

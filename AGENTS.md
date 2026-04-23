@@ -1,4 +1,4 @@
-# AI Agent System Instructions - HR Workflow Designer
+# AI Agent System Instructions - HR Workflow Architect
 
 ## Role
 
