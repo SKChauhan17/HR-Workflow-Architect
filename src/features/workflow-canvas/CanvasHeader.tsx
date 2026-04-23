@@ -121,8 +121,7 @@ export function CanvasHeader() {
           <line x1="8.5" y1="13.5" x2="15.5" y2="17.5" />
         </svg>
         <div>
-          <h1 className="text-sm font-semibold text-foreground">HR Workflow Designer</h1>
-          <p className="text-[11px] leading-tight text-muted-foreground">Phase 7 - Final Polish</p>
+          <h1 className="text-sm font-semibold text-foreground">HR Workflow Architect</h1>
         </div>
       </div>
 
@@ -153,7 +152,7 @@ export function CanvasHeader() {
           <Button
             variant="ghost"
             size="sm"
-            className="h-8 px-2 text-destructive hover:text-destructive"
+            className="h-8 px-2 border border-red-200 bg-red-50 text-red-700 shadow-sm hover:border-red-300 hover:bg-red-100 hover:text-red-800 dark:border-red-400/40 dark:bg-red-500/25 dark:text-red-50 dark:hover:border-red-300 dark:hover:bg-red-500/35 dark:hover:text-white"
             onClick={handleClearCanvas}
             disabled={!hasGraphData}
           >

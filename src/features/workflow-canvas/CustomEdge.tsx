@@ -56,7 +56,7 @@ function CustomEdgeComponent({
             type="button"
             aria-label="Delete edge"
             onClick={handleDelete}
-            className="pointer-events-auto inline-flex h-5 w-5 items-center justify-center rounded-full border border-indigo-200 bg-indigo-600 text-white shadow-lg shadow-indigo-500/20 transition-colors hover:bg-indigo-500 hover:shadow-indigo-500/30"
+            className="pointer-events-auto inline-flex h-5 w-5 items-center justify-center rounded-full border border-border bg-card text-muted-foreground shadow-sm transition-colors hover:border-red-500 hover:bg-red-500 hover:text-white dark:border-border dark:bg-background dark:text-muted-foreground dark:hover:border-red-300 dark:hover:bg-red-400 dark:hover:text-white"
           >
             <X className="h-3 w-3" />
           </button>

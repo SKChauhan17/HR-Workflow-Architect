@@ -74,13 +74,6 @@ export function NodePalette() {
     <aside className="flex h-full w-64 shrink-0 flex-col border-r border-border bg-background text-foreground">
       {/* Header */}
       <div className="flex items-center gap-2.5 border-b border-border px-4 py-3.5">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-5 w-5 text-blue-500">
-          <circle cx="18" cy="5" r="3" />
-          <circle cx="6" cy="12" r="3" />
-          <circle cx="18" cy="19" r="3" />
-          <line x1="8.5" y1="10.5" x2="15.5" y2="6.5" />
-          <line x1="8.5" y1="13.5" x2="15.5" y2="17.5" />
-        </svg>
         <div>
           <h2 className="text-[13px] font-semibold text-foreground">
             Node Palette

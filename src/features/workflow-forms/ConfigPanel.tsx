@@ -102,7 +102,7 @@ export function ConfigPanel() {
       <div className="mt-auto border-t border-border bg-muted p-4">
         <Button 
           variant="destructive" 
-          className="w-full shadow-none gap-2 text-xs" 
+          className="w-full gap-2 border border-red-200 bg-red-50 text-red-700 shadow-sm hover:border-red-300 hover:bg-red-100 dark:border-red-400/40 dark:bg-red-500/25 dark:text-red-50 dark:hover:border-red-300 dark:hover:bg-red-500/35 text-xs"
           size="sm"
           onClick={() => deleteNode(selectedNodeId)}
         >

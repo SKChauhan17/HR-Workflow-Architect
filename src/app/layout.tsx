@@ -12,9 +12,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "HR Workflow Designer",
+  title: "HR Workflow Architect",
   description:
-    "Enterprise workflow designer for HR processes — build, validate, and simulate approval pipelines visually.",
+    "Enterprise workflow architect for HR processes — build, validate, and simulate approval pipelines visually.",
 };
 
 export default function RootLayout({
