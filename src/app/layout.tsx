@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import "./globals.css";
 import { QueryProvider } from "@/providers/QueryProvider";
 import { Toaster } from "@/components/ui/sonner";
@@ -34,6 +36,8 @@ export default function RootLayout({
           <QueryProvider>
             {children}
             <Toaster position="bottom-right" richColors closeButton />
+            <Analytics />
+            <SpeedInsights />
           </QueryProvider>
         </ThemeProvider>
       </body>
